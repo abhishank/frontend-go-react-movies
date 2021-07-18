@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
-
-
+import { Link } from 'react-router-dom';
 export default class OneMovie extends Component {
     state = {
         movie: {},
@@ -38,11 +37,16 @@ export default class OneMovie extends Component {
     render() {
         const { movie, isLoaded, error } = this.state;
 
-        if (movie.genres) {
-            movie.genres = Object.values(movie.genres);
-        } else {
-            movie.genres = []
-        }
+        // if (movie.genres) {
+        //     {Object.entries(movie.genres).forEach(
+        //         ([id,genre])=>{
+        //             movie.genres[id] = genre
+        //         }
+        //     )}
+        //     // movie.genres = Object.values(movie.genres);
+        // } else {
+        //     movie.genres = []
+        // }
 
         if (error) {
             return (<div>Error: {error.message}</div>)
@@ -56,12 +60,13 @@ export default class OneMovie extends Component {
                         <small>MPAA Rating: {movie.mpaa_rating}</small>
                     </div>
                     <div className="float-end">
-                        {movie.genres.map((m, index) => (
-                            <span className="badge bg-secondary me-1" key={index}>
-                                {m}
+                        {Object.keys(movie.genres).map((key, index) => (
+                            <span className="badge bg-secondary me-1" key={key}>
+                                <Link to={`/genre/${key}/${movie.genres[key]}`}>{movie.genres[key]}</Link>
                             </span>
                         ))}
                     </div>
+
 
                     <div className="clearfix"></div>
                     <hr />

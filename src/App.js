@@ -1,11 +1,12 @@
-import React, { Fragment } from "react";
-import { BrowserRouter as Router, Switch, Route, Link, useParams, useRouteMatch } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import Movies from "./components/Movies";
 import Home from "./components/Home";
 import Admin from './components/Admin';
 import OneMovie from './components/OneMovie';
 import Genres from './components/Genres'
+import GenreMovies from "./components/GenreMovies";
 
 export default function App() {
     return (
@@ -44,6 +45,7 @@ export default function App() {
                             <Route exact path="/genre">
                                 <Genres />
                             </Route>
+                            <Route path="/genre/:id/:genreName" component={GenreMovies} />
                             <Route path="/admin">
                                 <Admin />
                             </Route>
@@ -54,6 +56,6 @@ export default function App() {
                     </div>
                 </div>
             </div>
-        </Router>
+        </Router >
     );
 }
