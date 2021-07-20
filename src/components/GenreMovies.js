@@ -24,7 +24,7 @@ export default class GenreMovies extends Component {
             })
             .then(json => {
                 let movies = []
-                if(json.movies){
+                if (json.movies) {
                     movies = json.movies
                 }
                 this.setState({
@@ -47,11 +47,16 @@ export default class GenreMovies extends Component {
             return (<div>Error: {error.message}</div>)
         } else if (!isLoaded) {
             return (<p>Loading ...</p>)
+        } else if (movies.length == 0) {
+            return (
+                <Fragment>
+                    <h2>No movies found for {this.genreName} Genre</h2>
+                </Fragment>
+            )
         } else {
             return (
                 <Fragment>
                     <h2>{this.genreName} Genre Movies </h2>
-
                     <ul>
                         {movies.map((m) => (
                             <li key={m.id}>
